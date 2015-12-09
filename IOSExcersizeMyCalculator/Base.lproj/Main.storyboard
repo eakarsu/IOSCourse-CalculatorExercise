@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="IOSExcersizeMyCalculator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +17,45 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TX8-Zb-s8n">
+                                <rect key="frame" x="41" y="47" width="518" height="505"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="counter" translatesAutoresizingMaskIntoConstraints="NO" id="pZL-J0-uhY">
+                                        <rect key="frame" x="0.0" y="0.0" width="518" height="109"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="109" id="2tj-XP-ouu"/>
+                                            <constraint firstAttribute="width" constant="350" id="FM9-oY-dML" userLabel="width = 250"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backpanel" translatesAutoresizingMaskIntoConstraints="NO" id="sOF-tn-byr">
+                                        <rect key="frame" x="0.0" y="109" width="518" height="396"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="350" id="6ev-Pt-S7K" userLabel="width = 370"/>
+                                            <constraint firstAttribute="height" constant="396" id="9JF-p6-kNf" userLabel="height = 250"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TX8-Zb-s8n" secondAttribute="bottom" constant="48" id="2SW-ul-KI0"/>
+                            <constraint firstItem="TX8-Zb-s8n" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="27" id="Lqh-Lt-iqJ"/>
+                            <constraint firstItem="TX8-Zb-s8n" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QVi-Ba-Blg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TX8-Zb-s8n" secondAttribute="trailing" constant="21" id="V8L-Bz-HgI"/>
+                            <constraint firstItem="TX8-Zb-s8n" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="21" id="bzO-hr-cLJ"/>
+                            <constraint firstItem="TX8-Zb-s8n" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="glB-Bv-lBJ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="273" y="357"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="backpanel" width="620" height="938"/>
+        <image name="counter" width="516" height="133"/>
+    </resources>
 </document>
