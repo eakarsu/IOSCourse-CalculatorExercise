@@ -1,0 +1,14 @@
+"display.accessibility.label" = "Calculator display";
+"offline.accessibility.hint" = "All calculations work offline and are restored after interruption.";
+"error.divisionByZero" = "Cannot divide by zero";
+"error.malformedInput" = "Invalid number";
+"error.inputTooLong" = "Number is too long";
+"button.add" = "Add";
+"button.subtract" = "Subtract";
+"button.multiply" = "Multiply";
+"button.divide" = "Divide";
+"button.equals" = "Equals";
+"button.clear" = "Clear";
+"button.toggleSign" = "Toggle sign";
+"button.percent" = "Percent";
+"button.decimal" = "Decimal separator";

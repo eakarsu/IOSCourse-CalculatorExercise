@@ -1,175 +1,103 @@
-//
-//  ViewController.swift
-//  retro-calculator
-//
-//  Created by Mark Price on 8/1/15.
-//  Copyright © 2015 devslopes. All rights reserved.
-//
-
 import UIKit
-import AVFoundation
 
-class ViewController: UIViewController {
-    
-    enum Operation: String {
-        case Divide = "/"
-        case Multiply = "*"
-        case Subtract = "-"
-        case Add = "+"
-        case Clear = "c"
-        case Minus = "m"
-        case Percent = "p"
-        case Empty = "Empty"
-    }
-    
-    
-    @IBOutlet weak var outputLbl: UILabel!
-    
-    
-    var runningNumber = ""
-    var leftValStr = ""
-    var rightValStr = ""
-    var currentOperation: Operation = Operation.Empty
-    var result = ""
-    
+final class ViewController: UIViewController {
+    private enum AvailabilityState { case restoring, emptyOffline, readyOffline, error }
+    @IBOutlet private weak var outputLbl: UILabel!
+
+    private let store = CalculatorStateStore()
+    private var engine = CalculatorEngine()
+    private let displayFormatter = CalculatorDisplayFormatter()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
+        applyAvailability(.restoring)
+        applyTestLaunchStateIfRequested()
+        if let restored = store.restore() { engine = CalculatorEngine(state: restored) }
+        outputLbl.adjustsFontSizeToFitWidth = true
+        outputLbl.minimumScaleFactor = 0.35
+        outputLbl.isAccessibilityElement = true
+        outputLbl.accessibilityLabel = NSLocalizedString("display.accessibility.label", comment: "Calculator display")
+        outputLbl.accessibilityHint = NSLocalizedString("offline.accessibility.hint", comment: "Offline behavior")
+        outputLbl.accessibilityIdentifier = "calculator.display"
+        view.accessibilityIdentifier = "calculator.ready.offline"
+        configureAccessibility(in: view)
+        NotificationCenter.default.addObserver(self, selector: #selector(saveState), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        render()
+        applyAvailability(engine.state == CalculatorState() ? .emptyOffline : .readyOffline)
     }
-    
-    func resetEnvironment ()
-    {
-        runningNumber = ""
-        leftValStr = ""
-        rightValStr = ""
-        currentOperation = Operation.Empty
-        result = ""
+
+    deinit { NotificationCenter.default.removeObserver(self) }
+
+    @IBAction private func numberPressed(_ button: UIButton) { engine.inputDigit(button.tag); renderAndSave() }
+    @IBAction private func onDecimalPressed(_ sender: Any) { engine.inputDecimalSeparator(); renderAndSave() }
+    @IBAction private func onClearPressed(_ sender: Any) { engine.clear(); store.clear(); render() }
+    @IBAction private func onMinusPressed(_ sender: Any) { engine.toggleSign(); renderAndSave() }
+    @IBAction private func onPercentPressed(_ sender: Any) { engine.percent(); renderAndSave() }
+    @IBAction private func onDividePressed(_ sender: Any) { select(.divide) }
+    @IBAction private func onMultiplyPressed(_ sender: Any) { select(.multiply) }
+    @IBAction private func onSubtractPressed(_ sender: Any) { select(.subtract) }
+    @IBAction private func onAddPressed(_ sender: Any) { select(.add) }
+    @IBAction private func onEqualPressed(_ sender: Any) { engine.equals(); renderAndSave() }
+
+    private func select(_ operation: CalculatorOperator) { engine.select(operation); renderAndSave() }
+
+    private func renderAndSave() { render(); saveState() }
+
+    private func render() {
+        if let error = engine.state.error {
+            applyAvailability(.error)
+            outputLbl.text = NSLocalizedString("error.\(error.rawValue)", comment: "Calculator error")
+            outputLbl.accessibilityValue = outputLbl.text
+            UIAccessibility.post(notification: .announcement, argument: outputLbl.text)
+            return
+        }
+        let storage = engine.displayStorageValue
+        outputLbl.text = displayFormatter.string(forStorageValue: storage)
+        outputLbl.accessibilityValue = outputLbl.text
+        applyAvailability(engine.state == CalculatorState() ? .emptyOffline : .readyOffline)
     }
-    
-    @IBAction func numberPressed(btn: UIButton!) {
-        
-        runningNumber += "\(btn.tag)"
-        outputLbl.text = runningNumber
-        
-        print ("num pressed =\(runningNumber) rvalStr=\(rightValStr) lvalStr=\(leftValStr) op=\(currentOperation) label==\(outputLbl.text)")
-        
-    }
-    
-    @IBAction func onClearPressed(sender: AnyObject) {
-        processUnaryOperation(Operation.Clear)
-    }
-    
-    @IBAction func onMinusPressed(sender: AnyObject) {
-        processUnaryOperation(Operation.Minus)
-    }
-    @IBAction func onPercentPressed(sender: AnyObject) {
-        processUnaryOperation(Operation.Percent)
-    }
-    
-    
-    @IBAction func onDividePressed(sender: AnyObject) {
-        processOperation(Operation.Divide)
-    }
-    
-    @IBAction func onMultiplyPressed(sender: AnyObject) {
-        processOperation(Operation.Multiply)
-    }
-    
-    @IBAction func onSubtractPressed(sender: AnyObject) {
-        processOperation(Operation.Subtract)
-    }
-    
-    @IBAction func onAddPressed(sender: AnyObject) {
-        processOperation(Operation.Add)
-    }
-    
-    @IBAction func onEqualPressed(sender: AnyObject) {
-        processOperation(currentOperation)
-    }
-    
-    func processUnaryOperation(op: Operation) {
-        
-        
-        if op != Operation.Empty {
-            //Run some math
-            
-            if leftValStr != "" {
-                
-                print ("Unityt operation called \(currentOperation) left=\(leftValStr)")
-                if op == Operation.Clear {
-                    result = "\(Double(leftValStr)! - Double(leftValStr)!)"
-                }else if op == Operation.Minus {
-                    result = "\(0 - Double(leftValStr)! )"
-                }else if op == Operation.Percent {
-                    result = "\(Double(leftValStr)! / 100.0)"
-                }
-                
-                runningNumber = ""
-                rightValStr = ""
-                
-                currentOperation = Operation.Empty
-                if (op == Operation.Clear){
-                    currentOperation = Operation.Clear
-                }
-                
-                leftValStr = result
-                outputLbl.text = result
-                
-            }
-            
-            print ("Calculating res=\(result)")
-            currentOperation = op
-        } else {
-            //This is the first time an operator has been pressed
-            leftValStr = runningNumber
-            runningNumber = ""
-            currentOperation = op
+
+    private func applyAvailability(_ state: AvailabilityState) {
+        switch state {
+        case .restoring: view.accessibilityIdentifier = "calculator.restoring"
+        case .emptyOffline: view.accessibilityIdentifier = "calculator.empty.offline"
+        case .readyOffline: view.accessibilityIdentifier = "calculator.ready.offline"
+        case .error: view.accessibilityIdentifier = "calculator.error"
         }
     }
-    
-    func processOperation(op: Operation) {
-        
-        print ("Process:rnum=\(runningNumber) rvalStr=\(rightValStr) lvalStr=\(leftValStr) op=\(currentOperation)")
-        if currentOperation != Operation.Empty && currentOperation != Operation.Clear {
-            //Run some math
-            
-            //A user selected an operator, but then selected another operator without
-            //first entering a number
-            if runningNumber != "" {
-                rightValStr = runningNumber
-                runningNumber = ""
-                
-                
-                if currentOperation == Operation.Multiply {
-                    result = "\(Double(leftValStr)! * Double(rightValStr)!)"
-                } else if currentOperation == Operation.Divide {
-                    result = "\(Double(leftValStr)! / Double(rightValStr)!)"
-                } else if currentOperation == Operation.Subtract {
-                    result = "\(Double(leftValStr)! - Double(rightValStr)!)"
-                } else if currentOperation == Operation.Add {
-                    result = "\(Double(leftValStr)! + Double(rightValStr)!)"
-                }
-                
-                leftValStr = result
-                outputLbl.text = result
-                print ("Calculating res=\(result)")
-            }
-            
-            
-            currentOperation = op
-            
-        } else {
-            //This is the first time an operator has been pressed
-            leftValStr = runningNumber
-            runningNumber = ""
-            currentOperation = op
+
+    private func applyTestLaunchStateIfRequested() {
+        let arguments = ProcessInfo.processInfo.arguments
+        if arguments.contains("-reset-calculator-state") { store.clear() }
+        if arguments.contains("-inject-malformed-calculator-state") {
+            UserDefaults.standard.set(Data("malformed".utf8), forKey: "calculator.state.v1")
         }
     }
-    
-    
+
+    private func configureAccessibility(in root: UIView) {
+        for case let button as UIButton in root.subviews {
+            let actions = button.actions(forTarget: self, forControlEvent: .touchUpInside) ?? []
+            let selector = actions.first ?? ""
+            if selector.contains("numberPressed") {
+                button.accessibilityLabel = String(button.tag)
+            } else {
+                let key: String?
+                if selector.contains("onAdd") { key = "button.add" }
+                else if selector.contains("onSubtract") { key = "button.subtract" }
+                else if selector.contains("onMultiply") { key = "button.multiply" }
+                else if selector.contains("onDivide") { key = "button.divide" }
+                else if selector.contains("onEqual") { key = "button.equals" }
+                else if selector.contains("onClear") { key = "button.clear" }
+                else if selector.contains("onMinus") { key = "button.toggleSign" }
+                else if selector.contains("onPercent") { key = "button.percent" }
+                else if selector.contains("onDecimal") { key = "button.decimal" }
+                else { key = nil }
+                if let key { button.accessibilityLabel = NSLocalizedString(key, comment: "Calculator button") }
+            }
+            button.accessibilityTraits.insert(.button)
+        }
+        root.subviews.filter { !($0 is UIButton) }.forEach { configureAccessibility(in: $0) }
+    }
+
+    @objc private func saveState() { try? store.save(engine.state) }
 }
-
-
-

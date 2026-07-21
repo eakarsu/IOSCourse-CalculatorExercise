@@ -1,0 +1,3 @@
+module CalculatorCore {
+    header "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/include/CalculatorCore-Swift.h"
+}

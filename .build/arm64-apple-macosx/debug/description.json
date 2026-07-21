@@ -1,0 +1,602 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.xctest/Contents/MacOS/CalculatorCorePackageTests",
+      "packagePath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise",
+      "productName" : "CalculatorCorePackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.CalculatorCore-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/sources",
+      "importPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/Sources/CalculatorCore/CalculatorEngine.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CalculatorCore",
+      "moduleOutputPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules/CalculatorCore.swiftmodule",
+      "objects" : [
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/CalculatorEngine.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/include/CalculatorCore-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ioscourse_calculatorexercise"
+      ],
+      "outputFileMapPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/CalculatorEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules/CalculatorCore.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/Sources/CalculatorCore/CalculatorEngine.swift"
+      ],
+      "tempsPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CalculatorCorePackageTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/sources",
+      "importPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules/CalculatorCoreTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CalculatorCorePackageTests",
+      "moduleOutputPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules/CalculatorCorePackageTests.swiftmodule",
+      "objects" : [
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/include/CalculatorCorePackageTests-Swift.h",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ioscourse_calculatorexercise"
+      ],
+      "outputFileMapPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules/CalculatorCorePackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.CalculatorCoreTests-arm64-apple-macosx-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build/sources",
+      "importPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/Tests/CalculatorCoreTests/CalculatorEngineTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules/CalculatorCore.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "CalculatorCoreTests",
+      "moduleOutputPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules/CalculatorCoreTests.swiftmodule",
+      "objects" : [
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build/CalculatorEngineTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ioscourse_calculatorexercise"
+      ],
+      "outputFileMapPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build/CalculatorEngineTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules/CalculatorCoreTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Volumes/external/projects/IOSCourse-CalculatorExercise/Tests/CalculatorCoreTests/CalculatorEngineTests.swift"
+      ],
+      "tempsPath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "CalculatorCore" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CalculatorCore",
+      "-package-name",
+      "ioscourse_calculatorexercise",
+      "-c",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/Sources/CalculatorCore/CalculatorEngine.swift",
+      "-I",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/include/CalculatorCore-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ioscourse_calculatorexercise",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CalculatorCorePackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CalculatorCorePackageTests",
+      "-package-name",
+      "ioscourse_calculatorexercise",
+      "-c",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.derived/runner.swift",
+      "-I",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/include/CalculatorCorePackageTests-Swift.h",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ioscourse_calculatorexercise",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "CalculatorCoreTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "CalculatorCoreTests",
+      "-package-name",
+      "ioscourse_calculatorexercise",
+      "-c",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/Tests/CalculatorCoreTests/CalculatorEngineTests.swift",
+      "-I",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ioscourse_calculatorexercise",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "CalculatorCore" : [
+
+    ],
+    "CalculatorCorePackageTests" : [
+      "CalculatorCoreTests",
+      "CalculatorCore"
+    ],
+    "CalculatorCoreTests" : [
+      "CalculatorCore"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/Sources/CalculatorCore/CalculatorEngine.swift"
+        }
+      ],
+      "outputFilePath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/sources"
+    },
+    "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/sources"
+    },
+    "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCore.build/CalculatorEngine.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build/CalculatorEngineTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCorePackageTests.product/Objects.LinkFileList"
+    },
+    "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/Tests/CalculatorCoreTests/CalculatorEngineTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/CalculatorCoreTests.build/sources"
+    },
+    "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Volumes/external/projects/IOSCourse-CalculatorExercise/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+name: ios-calculator-ci
+on: [push, pull_request]
+permissions: { contents: read }
+jobs:
+  verify:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift test
+      - run: plutil -lint IOSExcersizeMyCalculator/Info.plist IOSExcersizeMyCalculator/PrivacyInfo.xcprivacy
+      - run: xmllint --noout IOSExcersizeMyCalculator.xcodeproj/xcshareddata/xcschemes/IOSExcersizeMyCalculator.xcscheme
+      - run: ibtool --errors --warnings --notices --minimum-deployment-target 15.0 IOSExcersizeMyCalculator/Base.lproj/Main.storyboard
+      - run: xcodebuild -project IOSExcersizeMyCalculator.xcodeproj -scheme IOSExcersizeMyCalculator -destination 'platform=iOS Simulator,name=iPhone 16 Pro' -configuration Debug CODE_SIGNING_ALLOWED=NO test
+      - run: xcodebuild -project IOSExcersizeMyCalculator.xcodeproj -scheme IOSExcersizeMyCalculator -sdk iphonesimulator -configuration Release CODE_SIGNING_ALLOWED=NO analyze
