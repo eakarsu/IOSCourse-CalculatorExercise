@@ -1,0 +1,2 @@
+# The verification companion intentionally uses only the Python standard library.
+

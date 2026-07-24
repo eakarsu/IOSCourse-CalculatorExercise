@@ -67,3 +67,18 @@ Validation performed locally: 13/13 Swift package tests passed; the app sources 
 The project remains an independent native iOS app, not a web service and not a non-application repository. No `start.sh` was added: on this host a truthful launcher would have to boot, install, and launch through CoreSimulator, while `simctl` is unavailable and a build-only script would not be an application runtime. The campaign result is therefore `NOT_APPLICABLE/native_ios_no_web_login_runtime_spm_verified`, not a fabricated HTTP listener.
 
 Direct validation passed 13/13 Swift package tests, plist/project/scheme/storyboard structural checks, and iOS Simulator SDK typechecking of the calculator domain plus UIKit application sources. The unsigned Debug `xcodebuild` attempt was honestly retained as `FAILED/native_xcodebuild_host_unavailable`: Xcode 26.6 reports CoreSimulator 1051.49.0 versus required 1051.55.0, cannot resolve a simulator destination, and reports the iOS 26.5 platform unavailable. Assigned campaign ports `55618`, `6050`, and `6051` were not used and remained released. `git diff --check` passed.
+
+## Isolated runtime-verification companion (2026-07-24)
+
+The campaign now explicitly requires a local HTTP runtime even for native projects. A
+standard-library-only companion therefore lives under `companion/` and is launched by
+the root `start.sh` on separately assigned loopback API/UI ports. It preserves the
+offline UIKit target: the companion is verification infrastructure, not a port or
+simulation of the calculator UI.
+
+The companion provides SQLite-backed credential login, durable opaque sessions,
+authenticated identity/logout, an authenticated canonical OpenRouter review endpoint,
+provider-receipt/output persistence, and a clearly labelled local login/identity/AI UI. See
+`docs/RUNTIME_COMPANION.md` for its boundary and verification commands. Native evidence
+remains separate: Swift package tests and iPhoneOS SDK source typechecking pass, while
+this host's Xcode/CoreSimulator mismatch still prevents an honest simulator claim.
