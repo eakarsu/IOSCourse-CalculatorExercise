@@ -142,10 +142,14 @@ class RuntimeTests(unittest.TestCase):
                     document = response.read()
                     self.assertIn(b"does not replace or emulate", document)
                     self.assertIn(b'id="login-form"', document)
+                    self.assertIn(b"Auto Fill Demo Credentials", document)
+                    self.assertIn(b"Authenticated dashboard", document)
                 with urllib.request.urlopen(ui_base + "/app.js", timeout=5) as response:
                     script = response.read()
+                    self.assertIn(b"/api/auth/demo-credentials", script)
                     self.assertIn(b"/api/auth/login", script)
                     self.assertIn(b"/api/auth/me", script)
+                    self.assertIn(b"dashboard.hidden=false", script)
                     self.assertIn(b"/api/ai/calculator-safety-review", script)
             finally:
                 api.shutdown()

@@ -31,4 +31,16 @@ for port in "$API_PORT" "$UI_PORT"; do
   fi
 done
 
-exec python3 -m companion.runtime
+python_bin=""
+for candidate in "${PYTHON_BIN:-}" python3 /opt/homebrew/bin/python3 /usr/local/bin/python3; do
+  [[ -n "$candidate" ]] || continue
+  resolved="$(command -v "$candidate" 2>/dev/null || true)"
+  [[ -n "$resolved" ]] || continue
+  if "$resolved" -c 'import hashlib,sys; raise SystemExit(0 if sys.version_info >= (3, 11) and hasattr(hashlib, "scrypt") else 1)' 2>/dev/null; then
+    python_bin="$resolved"
+    break
+  fi
+done
+[[ -n "$python_bin" ]] || { printf 'ERROR: Python 3.11 or newer with hashlib.scrypt is required.\n' >&2; exit 1; }
+
+exec "$python_bin" -m companion.runtime
