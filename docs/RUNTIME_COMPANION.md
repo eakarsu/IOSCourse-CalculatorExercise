@@ -34,3 +34,5 @@ project and scheme, but Interface Builder and simulator execution were blocked b
 the host had CoreSimulator 1051.49.0 while Xcode required 1051.55.0 and reported the iOS
 26.5 platform unavailable to Interface Builder. No simulator or native application
 launch was claimed.
+
+The advisory form includes three complete illustrative prompts, one explicit OpenRouter action, and formatted Markdown or structured response sections. Authenticated users can open the latest 50 saved review records and read their output in the same structured renderer. Cancel waiting aborts the browser request and ignores late responses; provider attempts remain append-only audit evidence and may finish upstream. These controls apply only to this verification companion. The native offline app and its persistence boundary are unchanged.

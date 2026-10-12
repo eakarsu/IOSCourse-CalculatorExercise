@@ -289,6 +289,15 @@ class Store:
             ).fetchone()
         return dict(row) if row else None
 
+    def interactions(self, user_id: str) -> list[dict[str, object]]:
+        with closing(self.connect()) as db:
+            rows = db.execute(
+                """SELECT id,prompt,status,created_at FROM ai_interactions
+                   WHERE user_id=? ORDER BY created_at DESC LIMIT 50""",
+                (user_id,),
+            ).fetchall()
+        return [dict(row) for row in rows]
+
 
 class ProviderError(Exception):
     def __init__(self, code: str, message: str):
@@ -463,6 +472,11 @@ def api_handler(service: RuntimeService) -> type[BaseHTTPRequestHandler]:
                 if authenticated:
                     self.send_json(HTTPStatus.OK, {"user": authenticated[1]}, started)
                 return
+            if path == "/api/ai/interactions":
+                authenticated = self.require_identity(started)
+                if authenticated:
+                    self.send_json(HTTPStatus.OK, {"interactions": service.store.interactions(str(authenticated[1]["id"]))}, started)
+                return
             prefix = "/api/ai/interactions/"
             if path.startswith(prefix):
                 authenticated = self.require_identity(started)
@@ -528,18 +542,18 @@ UI_DOCUMENT = b"""<!doctype html>
 <title>iOS Calculator Verification Companion</title><link rel="stylesheet" href="/style.css"></head>
 <body><main><h1>Runtime-verification companion</h1><p>This local page verifies authentication, persistence, and governed AI integration for the repository. It does not replace or emulate the native UIKit calculator.</p>
 <section><h2>Credential login</h2><button id="fill-demo" type="button">Auto Fill Demo Credentials</button><form id="login-form"><label>Email <input id="email" name="email" type="email" autocomplete="username" required></label><label>Password <input id="password" name="password" type="password" autocomplete="current-password" required minlength="12"></label><button type="submit">Sign In</button></form><p id="identity" role="status">Not signed in.</p></section>
-<section id="dashboard" hidden><h2>Authenticated dashboard</h2><button id="logout" type="button">Log out</button><h3>Governed AI safety review</h3><form id="ai-form"><label>Review prompt <textarea id="prompt" name="prompt" required minlength="10">Review arithmetic correctness, privacy, accessibility, evidence, rollback, and human approval controls.</textarea></label><button id="review" type="submit">Request review</button></form><pre id="result" aria-live="polite">Signed in. Request a review when ready.</pre></section></main><script src="/app.js" defer></script></body></html>"""
+<section id="dashboard" hidden><h2>Authenticated dashboard</h2><button id="logout" type="button">Log out</button><h3>Governed AI safety review</h3><form id="ai-form"><label>Review prompt <textarea id="prompt" name="prompt" required minlength="10">Review arithmetic correctness, privacy, accessibility, evidence, rollback, and human approval controls.</textarea></label><button id="review" type="submit">Request review</button></form><div id="result" role="region" aria-label="AI advisory" aria-live="polite">Signed in. Request a review when ready.</div><section><h3>Saved reviews</h3><button id="refresh-history" type="button">Refresh saved reviews</button><div id="history" role="region" aria-label="Saved reviews"></div><div id="saved-detail" role="region" aria-label="Saved review detail"></div></section></section></main><script src="/ai-review.js" defer></script><script src="/app.js" defer></script></body></html>"""
 
-UI_STYLE = b"""body{font:16px system-ui;max-width:780px;margin:3rem auto;padding:0 1rem;color:#152238;background:#eef3f8}main{border:1px solid #ccd5e0;border-radius:16px;padding:2rem;background:#fff}section{border-top:1px solid #d9e1ea;margin-top:1.5rem;padding-top:1rem}form{display:grid;gap:.8rem;margin-bottom:.8rem}label{display:grid;gap:.3rem;font-weight:600}input,textarea,button{font:inherit;padding:.65rem;border:1px solid #8795a8;border-radius:7px}textarea{min-height:8rem}button{width:max-content;background:#174ea6;color:#fff;font-weight:700}button:disabled{background:#8290a2}pre{white-space:pre-wrap;background:#edf2f7;padding:1rem;border-radius:7px}"""
+UI_STYLE = b"""body{font:16px system-ui;max-width:780px;margin:3rem auto;padding:0 1rem;color:#152238;background:#eef3f8}main{border:1px solid #ccd5e0;border-radius:16px;padding:2rem;background:#fff}section{border-top:1px solid #d9e1ea;margin-top:1.5rem;padding-top:1rem}form{display:grid;gap:.8rem;margin-bottom:.8rem}label{display:grid;gap:.3rem;font-weight:600}input,textarea,button{font:inherit;padding:.65rem;border:1px solid #8795a8;border-radius:7px}textarea{min-height:8rem}button{width:max-content;background:#174ea6;color:#fff;font-weight:700}button:disabled{background:#8290a2}pre{white-space:pre-wrap;background:#edf2f7;padding:1rem;border-radius:7px} .question-examples{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0}.question-examples button{width:auto}.answer-markdown{line-height:1.75}.answer-markdown h2,.answer-markdown h3{line-height:1.3}.answer-table{overflow:auto}.answer-table table{width:100%;border-collapse:collapse}.answer-table th,.answer-table td{padding:.65rem;border:1px solid #d9e1ea;text-align:left}.answer-table th{background:#edf2f7}.answer-values{display:grid;gap:.8rem;margin:1rem 0}.answer-values>div{padding:.8rem;border:1px solid #d9e1ea;border-radius:8px}.answer-values dt{font-weight:650}.answer-values dd{margin:.3rem 0}.answer-values p{margin:.2rem 0}.muted{font-size:.9rem;color:#526178}.eyebrow{font-size:.75rem;font-weight:650;letter-spacing:.08em}#result{margin-top:1rem} """
 
 
 def ui_script(api_port: int) -> bytes:
     return f"""const API='http://127.0.0.1:{api_port}';let token='';const login=document.querySelector('#login-form');const dashboard=document.querySelector('#dashboard');const fillDemo=document.querySelector('#fill-demo');const ai=document.querySelector('#ai-form');const identity=document.querySelector('#identity');const result=document.querySelector('#result');const review=document.querySelector('#review');const logout=document.querySelector('#logout');
 async function api(path,options={{}}){{const headers={{Accept:'application/json',...(options.headers||{{}})}};if(token)headers.Authorization=`Bearer ${{token}}`;const response=await fetch(API+path,{{...options,headers}});let body=null;try{{body=await response.json()}}catch{{}}if(!response.ok)throw new Error(body?.error||`HTTP ${{response.status}}`);return body;}}
 fillDemo.addEventListener('click',async()=>{{identity.textContent='Loading demo credentials…';try{{const body=await api('/api/auth/demo-credentials');login.email.value=body.email;login.password.value=body.password;identity.textContent='Demo credentials loaded. Select Sign In.';}}catch(error){{identity.textContent=`Demo credentials unavailable: ${{error.message}}`;}}}});
-login.addEventListener('submit',async event=>{{event.preventDefault();identity.textContent='Signing in…';try{{const body=await api('/api/auth/login',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{email:login.email.value,password:login.password.value}})}});token=body.accessToken;login.password.value='';const me=await api('/api/auth/me');identity.textContent=`Signed in as ${{me.user.email}} (${{me.user.role}}).`;login.hidden=true;fillDemo.hidden=true;dashboard.hidden=false;}}catch(error){{token='';identity.textContent=`Login failed: ${{error.message}}`;dashboard.hidden=true;}}}});
-ai.addEventListener('submit',async event=>{{event.preventDefault();result.textContent='Requesting live review…';try{{const body=await api('/api/ai/calculator-safety-review',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{prompt:ai.prompt.value}})}});result.textContent=`Receipt: ${{body.providerReceipt.requestId}}\nModel: ${{body.model}}\n\n${{body.content}}`;}}catch(error){{result.textContent=`Review failed: ${{error.message}}`;}}}});
-logout.addEventListener('click',async()=>{{try{{await api('/api/auth/logout',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:'{{}}'}});}}finally{{token='';identity.textContent='Not signed in.';result.textContent='Sign in to request a review.';dashboard.hidden=true;login.hidden=false;fillDemo.hidden=false;}}}});""".encode()
+login.addEventListener('submit',async event=>{{event.preventDefault();identity.textContent='Signing in…';try{{const body=await api('/api/auth/login',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{email:login.email.value,password:login.password.value}})}});token=body.accessToken;login.password.value='';const me=await api('/api/auth/me');identity.textContent=`Signed in as ${{me.user.email}} (${{me.user.role}}).`;login.hidden=true;fillDemo.hidden=true;dashboard.hidden=false;AIReviewUI.refreshHistory();}}catch(error){{token='';identity.textContent=`Login failed: ${{error.message}}`;dashboard.hidden=true;}}}});
+AIReviewUI.mount({{form:ai,prompt:document.querySelector('#prompt'),result,history:document.querySelector('#history'),detail:document.querySelector('#saved-detail'),refresh:document.querySelector('#refresh-history'),list:()=>api('/api/ai/interactions'),read:id=>api('/api/ai/interactions/'+encodeURIComponent(id)),call:(signal)=>api('/api/ai/calculator-safety-review',{{method:'POST',signal,headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{prompt:document.querySelector('#prompt').value}})}})}});
+logout.addEventListener('click',async()=>{{try{{await api('/api/auth/logout',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:'{{}}'}});}}finally{{token='';identity.textContent='Not signed in.';result.textContent='Sign in to request a review.';AIReviewUI.clearHistory();dashboard.hidden=true;login.hidden=false;fillDemo.hidden=false;}}}});""".encode()
 
 
 def ui_handler(config: Config) -> type[BaseHTTPRequestHandler]:
@@ -557,6 +571,7 @@ def ui_handler(config: Config) -> type[BaseHTTPRequestHandler]:
                 "/index.html": ("text/html; charset=utf-8", UI_DOCUMENT),
                 "/style.css": ("text/css; charset=utf-8", UI_STYLE),
                 "/app.js": ("text/javascript; charset=utf-8", ui_script(config.api_port)),
+                "/ai-review.js": ("text/javascript; charset=utf-8", Path(__file__).with_name("ai-review.js").read_bytes()),
             }
             if path not in resources:
                 self.send_error(HTTPStatus.NOT_FOUND)
